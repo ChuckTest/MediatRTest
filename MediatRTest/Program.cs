@@ -13,7 +13,7 @@ namespace MediatRTest
         {
             InitHelper.Instance.SetupAutofac();
 
-            PingTest.Test();
+            RequestTest.Test();
 
             Console.ReadLine();
         }
