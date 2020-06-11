@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace MediatRTest
 {
@@ -9,11 +10,13 @@ namespace MediatRTest
 
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             InitHelper.Instance.SetupAutofac();
 
             RequestTest.Test();
+
+            await NotificationTest.Test();
 
             Console.ReadLine();
         }
