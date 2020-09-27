@@ -17,3 +17,7 @@ There are two flavors of requests in MediatR - ones that return a value, and one
 
     1.IRequest<T> - the request returns a value
     2.IRequest - the request does not return a value
+
+
+https://github.com/jbogard/MediatR/wiki/Behaviors#nb
+The pipeline behaviors are only compatible with IRequestHandler<TRequest,TResponse> and can't be used with INotificationHandler<TRequest>.
