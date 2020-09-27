@@ -8,11 +8,17 @@ using MediatR;
 
 namespace MediatRTest
 {
+    /// <summary>
+    /// 1.first create your notification message:
+    /// </summary>
     class PingNotification : INotification
     {
 
     }
 
+    /// <summary>
+    /// 2.create zero or more handlers for your notification
+    /// </summary>
     class PingNotificationHandler1 : INotificationHandler<PingNotification>
     {
         Task INotificationHandler<PingNotification>.Handle(PingNotification notification, CancellationToken cancellationToken)
@@ -22,6 +28,9 @@ namespace MediatRTest
         }
     }
 
+    /// <summary>
+    /// 2.create zero or more handlers for your notification
+    /// </summary>
     class PingNotificationHandler2 : INotificationHandler<PingNotification>
     {
         Task INotificationHandler<PingNotification>.Handle(PingNotification notification, CancellationToken cancellationToken)
@@ -36,6 +45,7 @@ namespace MediatRTest
         public static async Task Test()
         {
             var mediator = InitHelper.Instance.Container.Resolve<IMediator>();
+            //3.Finally, publish your message via the mediator:
             await mediator.Publish(new PingNotification());
         }
     }

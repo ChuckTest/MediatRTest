@@ -12,13 +12,25 @@ namespace MediatRTest
     {
         static async Task Main(string[] args)
         {
-            InitHelper.Instance.SetupAutofac();
+            try
+            {
+                InitHelper.Instance.SetupAutofac();
 
-            RequestTest.Test();
+                Console.WriteLine("Request/response messages, dispatched to a single handler");
+                RequestTest.Test();
+                Console.WriteLine();
 
-            await NotificationTest.Test();
-
-            Console.ReadLine();
+                Console.WriteLine("Notification messages, dispatched to multiple handlers");
+                await NotificationTest.Test();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.ReadLine();
+            }
         }
     }
 }
