@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Autofac;
+using FluentValidation;
 using MediatR;
 
 namespace MediatRTest
@@ -42,9 +43,23 @@ namespace MediatRTest
             // - behaviors as transient, i.e. InstancePerDependency()
             builder.RegisterAssemblyTypes(typeof(MyType).GetTypeInfo().Assembly).AsImplementedInterfaces(); // via assembly scan
             //builder.RegisterType<MyHandler>().AsImplementedInterfaces().InstancePerDependency();          // or individually
-            
+             // Register the Command's Validators (Validators based on FluentValidation library)
+
+            RegisterValidatorWithPipelineBehavior(builder);
+
             Container = builder.Build();
 
+        }
+
+        private void RegisterValidatorWithPipelineBehavior(ContainerBuilder builder)
+        {
+            //the parameter of ValidatorBehavior's constructor is IValidator<TRequest>[]
+            builder
+                .RegisterAssemblyTypes(typeof(MyType).GetTypeInfo().Assembly)
+                .Where(t => t.IsClosedTypeOf(typeof(IValidator<>)))
+                .AsImplementedInterfaces();
+
+            builder.RegisterGeneric(typeof(ValidatorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
         }
 
     }
