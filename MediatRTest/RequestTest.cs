@@ -12,7 +12,7 @@ namespace MediatRTest
     //public interface IRequest<out TResponse> : IBaseRequest
     public class PingRequest : IRequest<string>
     {
-        public int Name { get; set; }
+        public string Name { get; set; }
     }
 
     /// <summary>
@@ -35,7 +35,10 @@ namespace MediatRTest
             //similar to official code which use StructureMap https://structuremap.github.io/
             var mediator = InitHelper.Instance.Container.Resolve<IMediator>();
             //3.Finally, send a message through the mediator
-            var response = await mediator.Send(new PingRequest());
+            var response = await mediator.Send(new PingRequest()
+            {
+                Name = "Chuck"
+            });
             Console.WriteLine(response); // "Pong"
         }
     }
