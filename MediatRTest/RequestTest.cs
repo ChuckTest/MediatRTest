@@ -10,8 +10,9 @@ namespace MediatRTest
     /// 1.create a message
     /// </summary>
     //public interface IRequest<out TResponse> : IBaseRequest
-    public class PingRequest : IRequest<string> 
+    public class PingRequest : IRequest<string>
     {
+        public int Name { get; set; }
     }
 
     /// <summary>
