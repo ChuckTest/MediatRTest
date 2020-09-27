@@ -17,7 +17,7 @@ namespace MediatRTest
                 InitHelper.Instance.SetupAutofac();
 
                 Console.WriteLine("Request/response messages, dispatched to a single handler");
-                RequestTest.Test();
+                await RequestTest.Test();
                 Console.WriteLine();
 
                 Console.WriteLine("Notification messages, dispatched to multiple handlers");
@@ -25,6 +25,7 @@ namespace MediatRTest
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Catch a exception:");
                 Console.WriteLine(ex);
             }
             finally

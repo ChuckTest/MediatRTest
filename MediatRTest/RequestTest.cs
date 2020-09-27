@@ -29,7 +29,7 @@ namespace MediatRTest
 
     public class RequestTest
     {
-        public static async void Test()
+        public static async Task Test()
         {
             //https://github.com/jbogard/MediatR/blob/master/test/MediatR.Tests/SendTests.cs#L47
             //similar to official code which use StructureMap https://structuremap.github.io/
